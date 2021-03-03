@@ -9,11 +9,26 @@ from proj.Commands.wc import Wc
 
 
 class Executor:
+    """
+         Executor class
+
+         constructor with three fields commands and args. (and out for check output)
+         and method execute that eval current line interpretation line
+         and print result on standard output
+
+
+         Raisers:
+             not raising ane exceptions
+         """
     def __init__(self, commands, args):
         self.commands = [com.rstrip() for com in commands]
         self.args = [[el.rstrip() for el in arg] for arg in args]
+        self.out = ""
 
     def __execute__(self):
+        """
+        implements work with pipelines
+        """
         setup = {'wc': Wc(), 'exit': Exit(), 'pwd': Pwd(), 'echo': Echo(), 'cat': Cat()}
 
         if len(self.commands) == 0:
@@ -45,5 +60,6 @@ class Executor:
                     p = subprocess.run(self.commands[index], stdout=subprocess.PIPE,
                                        input=output, encoding='ascii')
                 output = p.stdout
+        self.out = output
         for line in output.split("\n"):
             print(line)

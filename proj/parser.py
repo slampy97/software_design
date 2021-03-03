@@ -4,6 +4,18 @@ from proj.utility_class.kind import Kind
 
 
 class Parser:
+    """
+         Parser class.
+
+         constructor with four fields:
+            commands with type string - name of commands
+            args with type list[list[string]]
+            str - current interpretation lie
+            vars - variables thar are local declared during the work of application
+            with type - dict{name-str:value-str}
+         Raisers:
+             not raising ane exceptions
+         """
     def __init__(self):
         self.commands = []
         self.args = []
@@ -11,9 +23,19 @@ class Parser:
         self.vars = None
 
     def __set_str__(self, string):
+        """
+             method that set string to work with
+             """
         self.str = string
 
     def __fillCommands__(self, variables):
+        """
+             method with one argument variables
+             do line split into tokens,
+             than substitute local vars, and then again split into tokens
+             final tokens are transformed into commands and their args
+             filling class fields args and commands
+             """
         tokenizer1 = Tokenizer()
         tokenizer1.__run__(self.str)
         lex = Lexer()

@@ -7,10 +7,18 @@ from proj.utility_class.kind import Kind
 
 
 class Tokenizer:
+    """
+         Class that split interpretation line in the tokens
+
+         constructor without arguments, with one field, list of tokens
+         """
     def __init__(self):
         self.tokens = []
 
     def __run__(self, string):
+        """
+             method that split line and fill list of tokens
+             """
         for char in string:
             if char == '|':
                 if len(self.tokens) == 0:
@@ -75,6 +83,9 @@ class Tokenizer:
                         self.tokens.append(obj)
 
     def __review__(self):
+        """
+             combine list of tokens in well readable string
+             """
         final_str = ""
         for token in self.tokens:
             final_str += token.kind().name + ' ' + token.data + "\n"

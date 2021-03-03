@@ -5,6 +5,20 @@ from proj.Commands.Commands_fabric import Command
 
 
 class Wc(Command):
+    """
+            Exit class of user command.
+
+            One method execute with args:
+               [optional] args = None, or list[String] with element - filenames
+               [optional] inp, out with type = String. Input and output data, that
+            allow to use this command inside pipeline
+
+            If args = None count lines, words and bytes from standard input, else if
+            len(args) == 1 then only count lines, words and bytes from this file, otherwise
+            gibe additional info - total count of lines, words and bytes
+            Raisers:
+                not raising ant exceptions, just 0 0 0 data if could not find the filename
+            """
     def execute(self, args=None, inp=None, out=None):
         lines = 0
         words = 0
@@ -15,7 +29,7 @@ class Wc(Command):
                     lines += 1
                     words += len(line.split(' '))
                     my_bytes += sys.getsizeof(line) - sys.getsizeof("")
-                return f"      {lines}       {words}      {my_bytes} "
+                return f"     {lines}      {words}      {my_bytes} "
 
             else:
                 for line in sys.stdin:

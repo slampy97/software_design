@@ -5,6 +5,10 @@ from proj.parser import Parser
 
 
 class Interpretation:
+    """
+    Interpretation class that read lines from input and
+    run bash commands
+    """
     def __init__(self):
         self.vars = {}
 

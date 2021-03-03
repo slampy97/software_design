@@ -12,17 +12,37 @@ def is_var(string):
 
 
 class Lexer:
+    """
+         Lexer class
+
+         constructor with two fields vars and tokens.
+
+         not split line into tokens, work with current list[tokens] and vars
+         find new vars and subs of current local variables
+
+         Raisers:
+             not raising ane exceptions
+         """
     def __init__(self):
         self.vars = None
         self.tokens = None
 
     def __setvar__(self, var):
+        """
+             set local variables
+             """
         self.vars = var
 
     def __setTokens__(self, tokens):
+        """
+             set tokens
+             """
         self.tokens = tokens
 
     def __make_str__(self):
+        """
+             make initial string from list[tokens]
+             """
         res_str = ""
         for token in self.tokens:
             if token.kind() == Kind.PIPE:
@@ -47,6 +67,9 @@ class Lexer:
         self.tokens = token_maker.tokens
 
     def substitute(self):
+        """
+             method that return string from list[tokens] after substitution
+             """
         if self.tokens is not None and self.vars is not None:
             pipe_count = 0
             for token in self.tokens:
