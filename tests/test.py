@@ -80,4 +80,12 @@ class ProjTest(TestCase):
         expected = "file1.txt file2.txt"
         self.assertEqual(expected, executor.out)
 
-  
+    def test_grep(self):
+        raw = "grep f $a $b"
+        parser = Parser()
+        parser.__set_str__(raw)
+        parser.__fillCommands__({'$a': "file1.txt", '$b': "file2.txt"})
+        executor = Executor(parser.commands, parser.args)
+        executor.__execute__()
+        expected = "fruit\n"
+        self.assertEqual(expected, executor.out)
