@@ -80,12 +80,4 @@ class ProjTest(TestCase):
         expected = "file1.txt file2.txt"
         self.assertEqual(expected, executor.out)
 
-    def test_bash_commands(self):
-        raw = "ls -a | grep f"
-        parser = Parser()
-        parser.__set_str__(raw)
-        parser.__fillCommands__({})
-        executor = Executor(parser.commands, parser.args)
-        executor.__execute__()
-        expected = "file1.txt\nfile2.txt\n"
-        self.assertEqual(expected, executor.out)
+  
