@@ -4,6 +4,7 @@ import sys
 from proj.Commands.cat import Cat
 from proj.Commands.echo import Echo
 from proj.Commands.exit import Exit
+from proj.Commands.grep import Grep
 from proj.Commands.pwd import Pwd
 from proj.Commands.wc import Wc
 
@@ -20,6 +21,7 @@ class Executor:
          Raisers:
              not raising ane exceptions
          """
+
     def __init__(self, commands, args):
         self.commands = [com.rstrip() for com in commands]
         self.args = [[el.rstrip() for el in arg] for arg in args]
@@ -29,7 +31,7 @@ class Executor:
         """
         implements work with pipelines
         """
-        setup = {'wc': Wc(), 'exit': Exit(), 'pwd': Pwd(), 'echo': Echo(), 'cat': Cat()}
+        setup = {'wc': Wc(), 'exit': Exit(), 'pwd': Pwd(), 'echo': Echo(), 'cat': Cat(), 'grep': Grep()}
 
         if len(self.commands) == 0:
             return
