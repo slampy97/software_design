@@ -6,6 +6,8 @@ from proj.Commands.echo import Echo
 from proj.Commands.exit import Exit
 from proj.Commands.pwd import Pwd
 from proj.Commands.wc import Wc
+from proj.Commands.cd import Cd
+from proj.Commands.ls import Ls
 
 
 class Executor:
@@ -29,7 +31,7 @@ class Executor:
         """
         implements work with pipelines
         """
-        setup = {'wc': Wc(), 'exit': Exit(), 'pwd': Pwd(), 'echo': Echo(), 'cat': Cat()}
+        setup = {'wc': Wc(), 'exit': Exit(), 'pwd': Pwd(), 'echo': Echo(), 'cat': Cat(), 'cd': Cd(), 'ls': Ls()}
 
         if len(self.commands) == 0:
             return
