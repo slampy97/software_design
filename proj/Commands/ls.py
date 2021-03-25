@@ -22,14 +22,4 @@ class Ls(Command):
         if not args:
             args = ["."]
         dirlist = filter(lambda x: x[0] != "." and x[0] != "_", os.listdir(args[0]))
-        if len(args) == 1:
-            return "\t" + "\n\t".join(dirlist)
-        output = []
-        for arg in args:
-            output.append(arg)
-            output.append(":\n\t")
-            dirlist = filter(lambda x: x[0] != "." and x[0] != "_", os.listdir(arg))
-            output.append("\n\t".join(dirlist))
-            output.append("\n")
-        # output.append("\n")
-        return "".join(output)
+        return "\t" + "\n\t".join(dirlist)

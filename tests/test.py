@@ -103,25 +103,6 @@ class ProjTest(TestCase):
         exptected = "\tfile2.txt\n\tfile1.txt\n\ttest.py"
         self.assertEqual(exptected, executor.out)
 
-    def test_ls_mult(self):
-        with cwd("."):
-            raw = "ls . ."
-            parser = Parser()
-            parser.__set_str__(raw)
-            parser.__fillCommands__({})
-            executor = Executor(parser.commands, parser.args)
-            executor.__execute__()
-            expected = ".:\n" \
-                       "\tfile2.txt\n" \
-                       "\tfile1.txt\n" \
-                       "\ttest.py\n" \
-                       ".:\n" \
-                       "\tfile2.txt\n" \
-                       "\tfile1.txt\n" \
-                       "\ttest.py\n"
-
-            self.assertEqual(expected, executor.out)
-
     def test_trivial_cd(self):
         expected = os.getcwd()
         raw = "cd ."
