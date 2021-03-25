@@ -1,6 +1,6 @@
 test:
 	cd tests
-	python -m unittest tests/test.py
+	python -m unittest test.py
 	cd ..
 
 all: test
