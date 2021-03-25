@@ -1,9 +1,22 @@
 from unittest import TestCase
 
+import os
 from proj.Commands.echo import Echo
 from proj.executor import Executor
 from proj.parser import Parser
 from proj.token_split import Tokenizer
+
+from contextlib import contextmanager
+
+
+@contextmanager
+def cwd(path):
+    oldpwd = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(oldpwd)
 
 
 class ProjTest(TestCase):
@@ -80,4 +93,34 @@ class ProjTest(TestCase):
         expected = "file1.txt file2.txt"
         self.assertEqual(expected, executor.out)
 
-  
+    def test_ls(self):
+        raw = "ls ."
+        parser = Parser()
+        parser.__set_str__(raw)
+        parser.__fillCommands__({})
+        executor = Executor(parser.commands, parser.args)
+        executor.__execute__()
+        exptected = "\tfile2.txt\n\tfile1.txt\n\ttest.py"
+        self.assertEqual(exptected, executor.out)
+
+    def test_trivial_cd(self):
+        expected = os.getcwd()
+        raw = "cd ."
+        parser = Parser()
+        parser.__set_str__(raw)
+        parser.__fillCommands__({})
+        executor = Executor(parser.commands, parser.args)
+        executor.__execute__()
+        self.assertEqual(expected, os.getcwd())
+
+    def test_cd(self):
+        with cwd("."):
+            with cwd(".."):
+                expected = os.getcwd()
+            raw = "cd .."
+            parser = Parser()
+            parser.__set_str__(raw)
+            parser.__fillCommands__({})
+            executor = Executor(parser.commands, parser.args)
+            executor.__execute__()
+            self.assertEqual(expected, os.getcwd())
